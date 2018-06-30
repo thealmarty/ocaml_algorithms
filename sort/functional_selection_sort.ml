@@ -20,19 +20,23 @@ let rec select s h =
     |_ -> []
 ;; 
 
-let rec sort l =
-   match l with
-      [] -> []
-      | hd :: tl -> 
-        match tl with
-          [] -> []
-      |_ ->
-        let rec findmin n =
-            if List.nth tl n = List.nth (select tl hd) n then
-              (if n < List.length tl - 1 then findmin (n + 1)
-              else sort tl)
+let rec findmin l = 
+  match l with
+    shd :: stl ->
+      (match stl with 
+        stlhd :: stltl ->
+          if shd < stlhd then
+            select stl shd
+          else
+            select stl stlhd
+        |_ ->
+            if shd < List.hd stl then
+              shd :: findmin (select stl shd)
             else 
-              List.nth tl :: sort tl
-          in
-          findmin (0)
-;;
+              List.hd stl :: findmin (select stl shd)
+      )
+    |_ -> []
+;; 
+
+
+
