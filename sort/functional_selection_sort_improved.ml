@@ -1,3 +1,5 @@
+(* functional_selection_sort_improved more closely follow the selection sort algorithm than functional_selection_sort. *)
+
 (* findmin takes a list and returns the smallest element of the list.*)
 let rec findmin (l : 'a list) : 'a =
   match l with
@@ -26,5 +28,5 @@ let selection_sort (l : 'a list) : 'a list =
   match l with
     hd :: tl ->
       findmin l :: selection_sort (remaining_list l)
-    |_ -> l
+    |[] -> l
 ;;
