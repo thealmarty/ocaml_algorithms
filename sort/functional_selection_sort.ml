@@ -11,5 +11,12 @@ let rec select s =
     |_ -> []
 ;; 
 
+let rec makesortedlist l =
+  match l with
+    hd :: tl ->
+      List.hd (List.rev (select l)) :: makesortedlist (List.tl (List.rev (select l)))
+    |_ -> l
+;;
+
 
 
