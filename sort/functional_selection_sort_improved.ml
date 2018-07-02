@@ -24,9 +24,9 @@ let rec remaining_list (l : 'a list) : 'a list =
 ;; 
 
 (* selection_sort takes a list and sort the list using the selection sort algorithm.*)
-let selection_sort (l : 'a list) : 'a list =
+let rec selection_sort (l : 'a list) : 'a list =
   match l with
     hd :: tl ->
       findmin l :: selection_sort (remaining_list l)
-    |[] -> l
+    |_ -> l
 ;;
