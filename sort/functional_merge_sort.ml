@@ -24,7 +24,7 @@ let rec spliteven l =
     hd :: h2 :: tl -> 
       h2 :: spliteven tl
     |[_] -> []
-    |_ -> l
+    |[] -> []
 ;;
 
 (*splitodd takes the odd elements from the list l.*) 
@@ -38,6 +38,7 @@ let rec splitodd l =
 (*merge_sort takes a list l and sort the elements from small to large using the merge sort algorithm.*)
 let rec merge_sort l =
   match l with
-    hd :: tl -> merge (merge_sort (splitodd l)) (merge_sort (spliteven l))
+    hd :: h2 :: tl -> merge (merge_sort (splitodd l)) (merge_sort (spliteven l))
+    |[_] -> l
     |_ -> []
 ;;
