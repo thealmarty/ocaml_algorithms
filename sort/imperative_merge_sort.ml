@@ -21,9 +21,11 @@ let merge a p q r =
 
 (* merge_sort is written following the pseudocode on p.34 of the same book, using merge as a subroutine. a is the array, p = 1 (first element) r = length of array. *)
 let rec merge_sort a p r =
-  while p < r do
-    merge_sort a p ((p + r)/2);
-    merge_sort a ((p + r)/2 + 1) r;
-    merge a p ((p + r)/2) r
-  done
+  let c = ref r in
+    while p < r && p < !c do
+      merge_sort a p ((p + r)/2);
+      merge_sort a ((p + r)/2 + 1) r;
+      merge a p ((p + r)/2) r;
+      c := (!c + p)/2
+    done
 ;;
