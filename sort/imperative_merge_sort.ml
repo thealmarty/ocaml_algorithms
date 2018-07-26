@@ -1,4 +1,9 @@
-(* Merge is written according to the pseudocode in "Introduction to Algorithms" 3rd edition p.31. a is the array, p q r are the number of element in the array, therefore, counting starts from 1, not 0.*)
+(* Merge is written according to the pseudocode in "Introduction to Algorithms" 3rd edition p.31. 
+ * a is the array.
+ * Counting from 1:
+   * p is the first element of the left array
+   * q is the first element of the right array
+   * r is the last element of the right array.*)
 let merge a p q r =
   let n1 = ref (q - p + 1) and n2 = ref (r - q) in
     let la = Array.make (!n1 + 1) max_int and ra = Array.make (!n2 + 1) max_int in
@@ -21,11 +26,9 @@ let merge a p q r =
 
 (* merge_sort is written following the pseudocode on p.34 of the same book, using merge as a subroutine. a is the array, p = 1 (first element) r = length of array. *)
 let rec merge_sort a p r =
-  let c = ref r in
-    while p < r && p < !c do
-      merge_sort a p ((p + r)/2);
-      merge_sort a ((p + r)/2 + 1) r;
-      merge a p ((p + r)/2) r;
-      c := (!c + p)/2
-    done
+  if p < r then ( 
+    merge_sort a p ((p + r)/2);
+    merge_sort a ((p + r)/2 + 1) r;
+    merge a p ((p + r)/2) r
+  )
 ;;
